@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi_res/models/food.dart';
 import '../theme/color.dart';
+import 'food_details.dart';
 import 'food_tile.dart';
 import 'intro_page_button.dart';
 
@@ -40,6 +41,16 @@ class _MenuPageState extends State<MenuPage> {
       rating: "5.0",
     ),
   ];
+  // navigate to food item details
+  void navigateToFoodDetails(int index) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FoodDetailsPage(
+            food: foodMenu[index],
+          ),
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +145,7 @@ class _MenuPageState extends State<MenuPage> {
               itemCount: foodMenu.length,
               itemBuilder: (context, index) => FoodTile(
                 food: foodMenu[index],
+                onTap: () => navigateToFoodDetails(index),
               ),
             ),
           ),
