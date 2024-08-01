@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sushi_res/models/food.dart';
+import 'package:provider/provider.dart';
+import 'package:sushi_res/models/shop.dart';
+import '../models/food.dart';
 import '../theme/color.dart';
 import 'food_details.dart';
 import 'food_tile.dart';
@@ -54,6 +56,8 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(

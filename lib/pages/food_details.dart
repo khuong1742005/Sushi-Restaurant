@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:sushi_res/pages/intro_page_button.dart';
 import 'package:sushi_res/theme/color.dart';
 
 import '../models/food.dart';
+import '../models/shop.dart';
 
 class FoodDetailsPage extends StatefulWidget {
   final Food food;
+
   const FoodDetailsPage({
     super.key,
     required this.food,
@@ -19,10 +22,13 @@ class FoodDetailsPage extends StatefulWidget {
 class _FoodDetailsPageState extends State<FoodDetailsPage> {
   // Quantity count
   int quantityCount = 0;
+
   // decrement
   void decrementQuantity() {
     setState(() {
-      quantityCount--;
+      if (quantityCount > 0) {
+        quantityCount--;
+      }
     });
   }
 
@@ -34,7 +40,22 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
   }
 
   // add to cart button
-  void addToCart() {}
+  void addToCart() {
+    if (quantityCount > 0) {
+      //get access to shop
+      final shop = context.read<Shop>();
+      //add to cart
+      shop.addToCart(widget.food, quantityCount);
+      //let the user know its was successful
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          content: Text('Successfully'),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

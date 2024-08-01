@@ -6,6 +6,7 @@ import '../models/food.dart';
 class FoodTile extends StatelessWidget {
   final Food food;
   final void Function()? onTap;
+
   const FoodTile({
     super.key,
     required this.food,
